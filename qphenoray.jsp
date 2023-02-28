@@ -1,3 +1,5 @@
+<%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*,java.text.*" errorPage="" %>
+<%@ include file="connexion.jsp" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
 <head>
@@ -77,7 +79,57 @@
 <body  >
   
 
- 
+    <%
+    
+    String q1_qvie = request.getParameter("qdvq1");
+    String qdvq2 = request.getParameter("qdvq2");
+    String QDVQ3a = request.getParameter("QDVQ3a");
+    String QDVQ3b = request.getParameter("QDVQ3b");
+    String QDVQ3c = request.getParameter("QDVQ3c");
+    String QDVQ4a = request.getParameter("QDVQ4a");
+    String QDVQ4b = request.getParameter("QDVQ4b");
+    String QDVQ4c = request.getParameter("QDVQ4c");
+    String QDVQ4d = request.getParameter("QDVQ4d");
+    String QDVQ5a = request.getParameter("QDVQ5a");
+    String QDVQ5b = request.getParameter("QDVQ5b");
+    String QDVQ5c = request.getParameter("QDVQ5c");
+    String QDVQ5d = request.getParameter("QDVQ5d");
+    int my_id_max = (int)session.getAttribute("id_pat");
+    
+
+    if(request.getParameter("btnEnvoiForm") != null) {
+        try {
+            String SQL = "INSERT INTO tableqdv (id_pat, q1_qvie, q2_qvie, q3a_qvie, q3b_qvie, q3c_qvie, q4a_qvie, q4b_qvie, q4c_qvie, q4d_qvie, q5a_qvie, q5b_qvie, q5c_qvie, q5d_qvie, date_saisie) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            PreparedStatement ps = conn.prepareStatement(SQL);
+
+            ps.setObject(1,my_id_max);
+            ps.setString(2,q1_qvie);
+            ps.setString(3,qdvq2);
+            ps.setString(4,QDVQ3a);
+            ps.setString(5,QDVQ3b);
+            ps.setString(6,QDVQ3c);
+            ps.setString(7,QDVQ4a);
+            ps.setString(8,QDVQ4b);
+            ps.setString(9,QDVQ4c);
+            ps.setString(10,QDVQ4d);
+            ps.setString(11,QDVQ5a);
+            ps.setString(12,QDVQ5b);
+            ps.setString(13,QDVQ5c);
+            ps.setString(14,QDVQ5d);
+            ps.setTimestamp(15, new java.sql.Timestamp(new java.util.Date().getTime())); 
+            ps.executeUpdate();
+            ps.close();
+
+            out.println("Questionnaire qualité vie bien ajouté");
+
+        } catch (SQLException ex) {
+            out.println("SQLException: " + ex.getMessage());
+            out.println("SQLState: " + ((SQLException) ex).getSQLState());
+            out.println("VendorError: " + ((SQLException) ex).getErrorCode());
+        }
+    }
+
+    %>
 
     <div class="body3" style="width:60%; margin:0 auto;">
 
@@ -99,7 +151,7 @@
         <div class="main">
 
 
-            <form action="validationfinale.html" method="post" name="qualitevie" onsubmit="return validerAvancer()">
+            <form action="validationfinale.jsp" method="post" name="qualitevie" onsubmit="return validerAvancer()">
                 <div class="body3" style="width:900px; margin:0 auto;">
                     <div style="text-align:center">
                         <h3> III. Phénomène de Raynaud </h3>

@@ -52,6 +52,8 @@
     String touchant = request.getParameter("touchant");
     String refdoss = request.getParameter("refdoss");
     String accord = "accepté";
+
+    Statement instruction = conn.createStatement();
     
 
     if(request.getParameter("btnEnvoiForm") != null) {
@@ -72,6 +74,14 @@
             ps.setTimestamp(11, new java.sql.Timestamp(new java.util.Date().getTime())); 
             ps.executeUpdate();
             ps.close();
+
+            ResultSet rs = instruction.executeQuery("SELECT MAX(id_pat) FROM patients");
+        
+            rs.next();
+            int my_id_max = rs.getInt(1);
+
+            session.setAttribute("id_pat", my_id_max);
+            instruction.executeUpdate("update patients set ref_dossier_pat= CONCAT(ref_dossier_pat, '_',id_pat) where `id_pat`="+my_id_max);
             out.println("Client bien ajouté");
 
         } catch (SQLException ex) {
@@ -80,8 +90,10 @@
             out.println("VendorError: " + ((SQLException) ex).getErrorCode());
         }
     }
-    
+
     %>
+
+
 
     <div class="body3" style="width:60%; margin:0 auto;">
 
@@ -102,7 +114,7 @@
 
         <div  >
 
-            <form action="qphenoray.html" method="post" name="qualitevie" onsubmit="return validerAvancer()">
+            <form action="qphenoray.jsp" method="post" name="qualitevie" onsubmit="return validerAvancer()">
                 <div   style="width:900px; margin:0 auto;">
                     <div style="text-align:center">
                         <h3> II. Qualité de vie </h3>
