@@ -120,7 +120,6 @@
             ps.executeUpdate();
             ps.close();
 
-            out.println("Questionnaire qualité vie bien ajouté");
 
         } catch (SQLException ex) {
             out.println("SQLException: " + ex.getMessage());

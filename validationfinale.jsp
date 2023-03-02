@@ -42,7 +42,6 @@
             ps.executeUpdate();
             ps.close();
 
-            out.println("Questionnaire phenoray bien ajouté");
 
         } catch (SQLException ex) {
             out.println("SQLException: " + ex.getMessage());

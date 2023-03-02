@@ -82,7 +82,6 @@
 
             session.setAttribute("id_pat", my_id_max);
             instruction.executeUpdate("update patients set ref_dossier_pat= CONCAT(ref_dossier_pat, '_',id_pat) where `id_pat`="+my_id_max);
-            out.println("Client bien ajouté");
 
         } catch (SQLException ex) {
             out.println("SQLException: " + ex.getMessage());

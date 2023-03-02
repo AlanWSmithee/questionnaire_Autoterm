@@ -18,7 +18,8 @@
 
         out.println("<table width='80%' border='0' ");
         while (resultat.next()) {
-            out.println("<tr bgcolor='BDCBDB'>") ;
+            out.println("<tr bgcolor='BDCBDB'>");
+            out.println("<td><a href=\"modifPat.jsp?idPat="+ resultat.getInt("id_pat") +"\"> Editer</td>");
             out.println("<td>" + resultat.getInt("id_pat") + "</td>");
             out.println("<td>" + resultat.getString("nom_pat") + "</td>");
             out.println("<td>" + resultat.getString("prenom_pat") + "</td>");
