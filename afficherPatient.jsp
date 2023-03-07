@@ -7,9 +7,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page Connexion</title>
+
+    
 </head>
 <body>
     <p>Patients enregistrés:</p>
+
+    <script>
+
+    function supprimerPat(idPat) {
+
+        let confirmSup = confirm("Voulez-vous vraiment supprimer le patient "+ idPat +"?");
+
+        if (confirmSup) {
+            window.location.href = "supprPatient.jsp?idPat=" + idPat;
+
+            
+        } else {
+
+        }
+    }
+
+    </script>
+    
     <%
     try {
         Statement statement = conn.createStatement();
@@ -27,6 +47,7 @@
             out.println("<td>" + resultat.getString("sexe_pat") + "</td>");
             out.println("<td>" + resultat.getString("email_pat") + "</td>");
             out.println("<td>" + resultat.getString("phenray_pat") + "</td>");
+            out.println("<td><a onclick=\"supprimerPat(" + resultat.getInt("id_pat") + ")\" href=\"#\"> Supprimer</td>");
             out.println("</tr>");
         }
 
